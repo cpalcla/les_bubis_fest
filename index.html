@@ -95,59 +95,41 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .barra-superior {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.25rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
+.barra-superior {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      cursor: pointer;
-      transition: transform var(--transition-base);
-      margin: 0; /* elimina márgenes verticales */
-      max-height: 60px; /* tamaño razonable del logo */
-    }
-    
-    .logo:hover {
-      transform: translateY(-2px);
-    }
-    
-    .logo img {
-      max-height: 250px; /* Aumenta el tamaño aquí */
-      height: auto;
-      width: auto;
-      border-radius: 0; /* Elimina el círculo */
-    }
+.logo img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 0;
+}
 
+.menu-principal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
 
+.menu-principal a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-principal);
+  font-size: 0.95rem;
+}
 
-    .logo-texto {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
+.menu-principal a:hover {
+  text-decoration: underline;
+}
 
-    .logo-texto span:first-child {
-      font-family: "Playfair Display", serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--color-secundario);
-    }
-
-    .logo-texto span:last-child {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--color-principal);
-      font-weight: 600;
-    }
 
     nav {
       display: flex;
@@ -885,30 +867,8 @@
     </nav>
   </div>
 </header>
-
-
-      <nav aria-label="navegación principal">
-        <a href="#dia-d" class="nav-enlace">El día D</a>
-        <a href="#asistencia" class="nav-enlace">Confirmar asistencia</a>
-        <a href="#faq" class="nav-enlace">Preguntas frecuentes</a>
-        <a href="#forasteros" class="nav-enlace">Para los "Forasters"</a>
-      </nav>
-
-      <button class="btn-menu" aria-label="Menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <div class="nav-links-movil">
-      <a href="#dia-d" class="nav-enlace">El día D</a>
-      <a href="#asistencia" class="nav-enlace">Confirmar asistencia</a>
-      <a href="#faq" class="nav-enlace">Preguntas frecuentes</a>
-      <a href="#forasteros" class="nav-enlace">Para los "Forasters"</a>
-    </div>
-  </header>
-
+    
+   
   <main>
     <section class="hero">
       <div class="contenedor">
@@ -1441,6 +1401,7 @@
 </body>
 
 </html>
+
 
 
 
