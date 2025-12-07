@@ -697,6 +697,7 @@
 
     .acordeon-contenido.activo {
       padding: 1rem 1.5rem 1.25rem;
+      max-height: 500px;
     }
 
     /* Forasteros */
@@ -1319,20 +1320,23 @@
     
     acordeonBotones.forEach(boton => {
       boton.addEventListener('click', () => {
-        const expandido = boton.getAttribute('aria-expanded') === 'true';
-        const item = boton.closest('.acordeon-item');
-        const contenido = item.querySelector('.acordeon-contenido');
+        const contenido = boton.nextElementSibling;
+        const abierto = boton.getAttribute('aria-expanded') === 'true';
     
-        acordeonBotones.forEach(otroBoton => {
-          const otroItem = otroBoton.closest('.acordeon-item');
-          const otroContenido = otroItem.querySelector('.acordeon-contenido');
-    
-          if (otroBoton !== boton) {
-            otroBoton.setAttribute('aria-expanded', 'false');
-            otroContenido.style.maxHeight = null;
-            otroContenido.classList.remove('activo');
-          }
+        // Cierra todos
+        acordeonBotones.forEach(btn => {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.nextElementSibling.classList.remove('activo');
         });
+    
+        // Abre el actual si no lo estaba
+        if (!abierto) {
+          boton.setAttribute('aria-expanded', 'true');
+          contenido.classList.add('activo');
+        }
+      });
+    });
+
     
         boton.setAttribute('aria-expanded', String(!expandido));
         if (!expandido) {
@@ -1420,6 +1424,7 @@
 </body>
 
 </html>
+
 
 
 
