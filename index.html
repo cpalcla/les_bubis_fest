@@ -1262,147 +1262,150 @@
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
   <script>
-    // Scroll effect para header
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-
-    // Navegación activa
-    const navLinks = document.querySelectorAll('.nav-enlace');
-    const sections = document.querySelectorAll('main section');
-
-    function actualizarEnlaceActivo() {
-      let indexActiva = sections.length;
-      while (--indexActiva && window.scrollY + 150 < sections[indexActiva].offsetTop) {}
-      
-      navLinks.forEach(link => link.classList.remove('activo'));
-      const idSeccionActiva = sections[indexActiva]?.id;
-      if (idSeccionActiva) {
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === '#' + idSeccionActiva) {
-            link.classList.add('activo');
-          }
-        });
-      }
-    }
-
-    window.addEventListener('scroll', actualizarEnlaceActivo);
-    actualizarEnlaceActivo();
-
-    // Menú móvil
-    const btnMenu = document.querySelector('.btn-menu');
-    const navMovil = document.querySelector('.nav-links-movil');
-
-    btnMenu.addEventListener('click', () => {
-      const expandido = btnMenu.getAttribute('aria-expanded') === 'true';
-      btnMenu.setAttribute('aria-expanded', !expandido);
-      btnMenu.classList.toggle('menu-movil-activo');
-      navMovil.classList.toggle('abierto');
-    });
-
-    navMovil.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        btnMenu.setAttribute('aria-expanded', 'false');
-        btnMenu.classList.remove('menu-movil-activo');
-        navMovil.classList.remove('abierto');
-      });
-    });
-
-    // Acordeón FAQ
-    const acordeonBotones = document.querySelectorAll('.acordeon-boton');
-
-    acordeonBotones.forEach(boton => {
-      boton.addEventListener('click', () => {
-        const expandido = boton.getAttribute('aria-expanded') === 'true';
-        const contenido = boton.nextElementSibling;
-
-        acordeonBotones.forEach(otroBoton => {
-          if (otroBoton !== boton) {
-            otroBoton.setAttribute('aria-expanded', 'false');
-            const otroContenido = otroBoton.nextElementSibling;
-            otroContenido.style.maxHeight = null;
-            otroContenido.classList.remove('activo');
-          }
-        });
-
-        boton.setAttribute('aria-expanded', String(!expandido));
-        if (!expandido) {
-          contenido.style.maxHeight = contenido.scrollHeight + 'px';
-          contenido.classList.add('activo');
+    document.addEventListener("DOMContentLoaded", function () {
+      // Scroll effect para header
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
         } else {
-          contenido.style.maxHeight = null;
-          contenido.classList.remove('activo');
+          header.classList.remove('scrolled');
         }
       });
-    });
 
-    // Campos dinámicos de nombres de asistentes
-    const selectAsistentes = document.getElementById('asistentes');
-    const campoNombres = document.getElementById('campo-nombres-asistentes');
-    const contenedorAsistentes = document.getElementById('contenedor-asistentes');
+      // Navegación activa
+      const navLinks = document.querySelectorAll('.nav-enlace');
+      const sections = document.querySelectorAll('main section');
 
-    selectAsistentes.addEventListener('change', (e) => {
-      const numAsistentes = parseInt(e.target.value);
-      contenedorAsistentes.innerHTML = '';
+      function actualizarEnlaceActivo() {
+        let indexActiva = sections.length;
+        while (--indexActiva && window.scrollY + 150 < sections[indexActiva].offsetTop) {}
       
-      if (numAsistentes > 0) {
-        campoNombres.style.display = 'block';
-        for (let i = 1; i <= numAsistentes; i++) {
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.name = `entry.8234567890`;
-          input.placeholder = `Nombre completo persona ${i}`;
-          input.style.marginBottom = '0.75rem';
-          input.style.borderRadius = 'var(--radius-medio)';
-          input.style.border = '2px solid var(--color-borde)';
-          input.style.padding = '0.85rem 1.1rem';
-          input.style.fontSize = '0.95rem';
-          input.style.width = '100%';
-          input.required = true;
-          contenedorAsistentes.appendChild(input);
-        }
-      } else {
-        campoNombres.style.display = 'none';
-      }
-    });
-
-    // Manejo del envío del formulario
-    const formulario = document.getElementById('form-asistencia');
-    const mensajeExito = document.getElementById('mensaje-exito');
-
-    formulario.addEventListener('submit', (e) => {
-      setTimeout(() => {
-        formulario.style.display = 'none';
-        mensajeExito.classList.add('visible');
-        window.scrollTo({
-          top: mensajeExito.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      }, 500);
-    });
-
-    // Smooth scroll para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+        navLinks.forEach(link => link.classList.remove('activo'));
+        const idSeccionActiva = sections[indexActiva]?.id;
+        if (idSeccionActiva) {
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === '#' + idSeccionActiva) {
+              link.classList.add('activo');
+            }
           });
         }
+      }
+
+      window.addEventListener('scroll', actualizarEnlaceActivo);
+      actualizarEnlaceActivo();
+
+      // Menú móvil
+      const btnMenu = document.querySelector('.btn-menu');
+      const navMovil = document.querySelector('.nav-links-movil');
+
+      btnMenu.addEventListener('click', () => {
+        const expandido = btnMenu.getAttribute('aria-expanded') === 'true';
+        btnMenu.setAttribute('aria-expanded', !expandido);
+        btnMenu.classList.toggle('menu-movil-activo');
+        navMovil.classList.toggle('abierto');
+      });
+
+      navMovil.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          btnMenu.setAttribute('aria-expanded', 'false');
+          btnMenu.classList.remove('menu-movil-activo');
+          navMovil.classList.remove('abierto');
+        });
+      });
+
+    // Acordeón FAQ
+      const acordeonBotones = document.querySelectorAll('.acordeon-boton');
+
+      acordeonBotones.forEach(boton => {
+        boton.addEventListener('click', () => {
+          const expandido = boton.getAttribute('aria-expanded') === 'true';
+          const contenido = boton.nextElementSibling;
+
+          acordeonBotones.forEach(otroBoton => {
+            if (otroBoton !== boton) {
+              otroBoton.setAttribute('aria-expanded', 'false');
+              const otroContenido = otroBoton.nextElementSibling;
+              otroContenido.style.maxHeight = null;
+              otroContenido.classList.remove('activo');
+            }
+          });
+
+          boton.setAttribute('aria-expanded', String(!expandido));
+          if (!expandido) {
+            contenido.style.maxHeight = contenido.scrollHeight + 'px';
+            contenido.classList.add('activo');
+          } else {
+            contenido.style.maxHeight = null;
+            contenido.classList.remove('activo');
+          }
+        });
+      });
+
+    // Campos dinámicos de nombres de asistentes
+      const selectAsistentes = document.getElementById('asistentes');
+      const campoNombres = document.getElementById('campo-nombres-asistentes');
+      const contenedorAsistentes = document.getElementById('contenedor-asistentes');
+
+      selectAsistentes.addEventListener('change', (e) => {
+        const numAsistentes = parseInt(e.target.value);
+        contenedorAsistentes.innerHTML = '';
+      
+        if (numAsistentes > 0) {
+          campoNombres.style.display = 'block';
+          for (let i = 1; i <= numAsistentes; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `entry.8234567890`;
+            input.placeholder = `Nombre completo persona ${i}`;
+            input.style.marginBottom = '0.75rem';
+            input.style.borderRadius = 'var(--radius-medio)';
+            input.style.border = '2px solid var(--color-borde)';
+            input.style.padding = '0.85rem 1.1rem';
+            input.style.fontSize = '0.95rem';
+            input.style.width = '100%';
+            input.required = true;
+            contenedorAsistentes.appendChild(input);
+          }
+        } else {
+          campoNombres.style.display = 'none';
+        }
+      });
+
+    // Manejo del envío del formulario
+      const formulario = document.getElementById('form-asistencia');
+      const mensajeExito = document.getElementById('mensaje-exito');
+
+      formulario.addEventListener('submit', (e) => {
+        setTimeout(() => {
+          formulario.style.display = 'none';
+          mensajeExito.classList.add('visible');
+          window.scrollTo({
+            top: mensajeExito.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }, 500);
+      });
+
+    // Smooth scroll para enlaces internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
       });
     });
   </script>
 </body>
 
 </html>
+
 
 
 
